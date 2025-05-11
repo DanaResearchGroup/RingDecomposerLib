@@ -1,0 +1,68 @@
+################################################################################
+#
+#   Files for git to ignore
+#
+################################################################################
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Compiled Python modules
+*.pyc
+__pycache__/
+*.so
+*.pyd
+
+# Build and distribution artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE and editor files
+.idea/
+.vscode/
+.history/*
+
+# User-generated content / Scratch directories
+Projects/
+examples/
+scratch/
+
+# Testing and coverage files
+.coverage
+testing/*
+htmlcov/*
+arc/testing/gcn_tst/
+
+# Database files
+*.csv
+*.db
+*.sqlite3
+
+# iPython/Jupyter files
+*.ipynb_*
+.ipynb_checkpoints/
+
+# Compiled documentation
+docs/build/*
+
+# Temporary/System files
+**/.fuse_hidden*
+*~
+.#*
+
+# Specific output files
+timer.dat
+nul
+run.out
+*.log
+*.err
+
+# Trunk Check
+.trunk
