@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.10)
+project(RingDecomposerLib C)
+
 if (PYTHON AND BUILD_PYTHON_WRAPPER)
   set(SETUP_PY_IN "${CMAKE_CURRENT_SOURCE_DIR}/setup.py.in")
   set(SETUP_PY    "${CMAKE_CURRENT_BINARY_DIR}/setup.py")

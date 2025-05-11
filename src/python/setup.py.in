@@ -1,34 +1,37 @@
-import sys
-
-# we need this hack to pass a static library
-# from command line
-last_opt = sys.argv[-1]
-static_libs = [last_opt] if last_opt != "GUARD" else []
-sys.argv = sys.argv[:-1]
-
 from distutils.core import setup
 from distutils.extension import Extension
+from distutils.dist import Distribution
 from Cython.Build import cythonize
+import sys
+import os
 
-include_dirs  = ['${PYTHON_INCLUDE_DIR}']
-library_dirs  = []
+# --- Pip workaround for egg-base ---
+Distribution.global_options.append(('egg-base=', None, 'pip workaround'))
 
-shared_libs   = []
+# --- Static library passed as final argument (optional) ---
+static_libs = []
+if len(sys.argv) > 1 and os.path.isfile(sys.argv[-1]):
+    static_libs.append(sys.argv[-1])
+    sys.argv = sys.argv[:-1]
+
+# --- Set include and library paths ---
+include_dirs = ['../build/include']  # Relative to this file
+library_dirs = []
 
 extensions = [
-    Extension('py_rdl.wrapper.DataInternal',
-              ['${CMAKE_CURRENT_SOURCE_DIR}/py_rdl/wrapper/DataInternal.pyx'],
+    Extension(
+        'py_rdl.wrapper.DataInternal',
+        ['./py_rdl/wrapper/DataInternal.pyx'],
         extra_objects=static_libs,
         include_dirs=include_dirs,
-        libraries=shared_libs,
-        library_dirs=library_dirs)]
+        libraries=[],
+        library_dirs=library_dirs
+    )
+]
 
-# we need this hack for windows, because that path has to be native
-# (by THIS path must be native porbably no one will ever know...)
-# and \ must be escaped for python
-native_path = r'${NATIVE_CURRENT_SOURCE_DIR}'
-
-setup(name = 'py_rdl',
-      ext_modules = cythonize(extensions),
-      package_dir={'' : native_path},
-      packages=['py_rdl', 'py_rdl.wrapper'])
+setup(
+    name='py_rdl',
+    ext_modules=cythonize(extensions, language_level=3),
+    package_dir={'': '.'},
+    packages=['py_rdl', 'py_rdl.wrapper']
+)
