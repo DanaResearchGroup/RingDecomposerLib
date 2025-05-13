@@ -31,7 +31,11 @@ extensions = [
 
 setup(
     name='py_rdl',
-    ext_modules=cythonize(extensions, language_level=3),
+    ext_modules=cythonize(
+    extensions,
+    language_level=3,
+    include_path=["./py_rdl/wrapper"]  # relative to setup.py
+),
     package_dir={'': '.'},
     packages=['py_rdl', 'py_rdl.wrapper']
 )
