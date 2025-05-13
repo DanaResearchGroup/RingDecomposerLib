@@ -15,7 +15,7 @@ if len(sys.argv) > 1 and os.path.isfile(sys.argv[-1]):
     sys.argv = sys.argv[:-1]
 
 # --- Set include and library paths ---
-include_dirs = ['../build/include']  # Relative to this file
+include_dirs = ['../RingDecomposerLib']  # Relative to this file
 library_dirs = []
 
 extensions = [
