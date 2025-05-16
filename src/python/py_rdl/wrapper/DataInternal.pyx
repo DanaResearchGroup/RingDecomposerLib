@@ -16,7 +16,7 @@
 # Unique Ring Families and Other Cycle Bases.
 # J. Chem. Inf. Model., 2017, 57 (2), pp 122-126
 
-from cRingDecomposerLib cimport *
+from .cRingDecomposerLib cimport *
 from libc.stdlib cimport free
 from .RDLError import RDLError
 from .Cycle import Cycle
